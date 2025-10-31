@@ -3,7 +3,9 @@ import {
     getAuth,
     onAuthStateChanged,
     signInWithEmailAndPassword,
-    signOut
+    signOut,
+    setPersistence,
+    browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import {
     getFirestore,
@@ -78,8 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
         db = getFirestore(app);
         auth = getAuth(app);
         storage = getStorage(app);
+        setPersistence(auth, browserSessionPersistence);
         setLogLevel('Debug'); // Útil para depurar
-        console.log("Firebase inicializado correctamente.");
+        console.log("Firebase inicializado correctamente y persistencia configurada.");
     } catch (error) {
         console.error("Error inicializando Firebase:", error);
         alert("Error fatal: No se pudo conectar a la base de datos. Verifica tu 'firebaseConfig' en el archivo index.html.");
